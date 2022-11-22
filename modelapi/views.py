@@ -3,7 +3,9 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework.views import APIView
 import tensorflow as tf
-from modelbackend.settings import BASE_DIR
+import importlib  
+settings = importlib.import_module("systemcrackers-ml.settings")
+from settings import BASE_DIR
 from keras.models import load_model
 import numpy as np
 from keras.utils import load_img, img_to_array
