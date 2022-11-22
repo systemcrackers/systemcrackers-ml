@@ -14,9 +14,8 @@ import os
 class ModelApi(APIView):
     def get(self, request):
         data = request.data
-        image_url = data["image_url"]
         model = load_model(os.path.join(BASE_DIR, 'model_1.h5'))
-        test_image = load_img(image_url, target_size = (32,32))
+        test_image = load_img(request.files, target_size = (32,32))
         test_image = img_to_array(test_image)
         test_image = np.expand_dims(test_image, axis = 0)
         result = model.predict(test_image)
@@ -33,6 +32,3 @@ class ModelApi(APIView):
             pred = "Nothing"
 
         return Response({'status': "200", 'pred' : pred})
-
-        
-
